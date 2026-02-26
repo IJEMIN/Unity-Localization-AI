@@ -1,0 +1,22 @@
+{
+    "name": "Unity.Localization.AI.Editor",
+    "rootNamespace": "Unity.Localization.AI.Editor",
+    "references": [
+        "Unity.Localization",
+        "Unity.Localization.Editor",
+        "Unity.Localization.Settings",
+        "Unity.Localization.AI",
+        "UnityEditor.SceneManagement"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,18 @@
+{
+  "name": "com.unity.localization.ai",
+  "version": "1.0.0",
+  "displayName": "Localization AI",
+  "description": "AI-powered localization automation for Unity Localization package.",
+  "unity": "2022.3",
+  "dependencies": {
+    "com.unity.localization": "1.0.0"
+  },
+  "keywords": [
+    "localization",
+    "ai",
+    "automation"
+  ],
+  "author": {
+    "name": "Jemin Lee"
+  }
+}

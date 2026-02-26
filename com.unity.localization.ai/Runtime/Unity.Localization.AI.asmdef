@@ -1,0 +1,19 @@
+{
+    "name": "Unity.Localization.AI",
+    "rootNamespace": "Unity.Localization.AI",
+    "references": [
+        "Unity.Localization",
+        "Unity.Localization.Editor",
+        "Unity.Localization.Settings",
+        "Newtonsoft.Json"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
