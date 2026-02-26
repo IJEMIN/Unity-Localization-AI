@@ -1,10 +1,21 @@
 using UnityEditor;
 using UnityEngine;
+using System.Linq;
 
 namespace Unity.Localization.AI.Editor
 {
     public static class LocalizationAISettings
     {
+        private static readonly string[] AvailableModels = 
+        {
+            "gpt-4o",
+            "gpt-4o-mini",
+            "gpt-4-turbo",
+            "gpt-4",
+            "o1-preview",
+            "o1-mini"
+        };
+
         [SettingsProvider]
         public static SettingsProvider CreateLocalizationAISettingsProvider()
         {
@@ -23,6 +34,21 @@ namespace Unity.Localization.AI.Editor
                         PlayerPrefs.Save();
                     }
                     
+                    EditorGUILayout.Space();
+
+                    // Model Selection
+                    var currentModel = PlayerPrefs.GetString(OpenAITranslator.MODEL_PLAYERPREFS_KEY, OpenAITranslator.DEFAULT_MODEL);
+                    int selectedIndex = System.Array.IndexOf(AvailableModels, currentModel);
+                    if (selectedIndex == -1) selectedIndex = 0;
+
+                    EditorGUI.BeginChangeCheck();
+                    selectedIndex = EditorGUILayout.Popup("GPT Model", selectedIndex, AvailableModels);
+                    if (EditorGUI.EndChangeCheck())
+                    {
+                        PlayerPrefs.SetString(OpenAITranslator.MODEL_PLAYERPREFS_KEY, AvailableModels[selectedIndex]);
+                        PlayerPrefs.Save();
+                    }
+
                     EditorGUILayout.Space();
 
                     // Override Prompt

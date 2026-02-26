@@ -30,19 +30,24 @@ namespace Unity.Localization.AI.Editor
 
         private void OnEnable()
         {
-            // Try to set default locales
+            // Try to set default locales based on current project settings
             if (LocalizationSettings.AvailableLocales != null)
             {
                 var locales = LocalizationSettings.AvailableLocales.Locales;
-                if (locales.Count >= 2)
+                if (locales.Count > 0)
                 {
-                    sourceLocale = locales.FirstOrDefault(l => l.Identifier == "ko-KR") ?? locales[0];
-                    targetLocale = locales.FirstOrDefault(l => l.Identifier == "en") ?? (locales.Count > 1 ? locales[1] : locales[0]);
-                }
-                else if (locales.Count > 0)
-                {
-                    sourceLocale = locales[0];
-                    targetLocale = locales[0];
+                    // Prefer currently active project locale or first available
+                    sourceLocale = LocalizationSettings.SelectedLocale ?? locales[0];
+                    
+                    if (locales.Count > 1)
+                    {
+                        // Set target as something different from source if possible
+                        targetLocale = (sourceLocale == locales[0]) ? locales[1] : locales[0];
+                    }
+                    else
+                    {
+                        targetLocale = sourceLocale;
+                    }
                 }
             }
         }
@@ -56,7 +61,12 @@ namespace Unity.Localization.AI.Editor
             EditorGUILayout.BeginVertical(EditorStyles.helpBox);
             sourceLocale = (Locale)EditorGUILayout.ObjectField("Source Locale", sourceLocale, typeof(Locale), false);
             targetLocale = (Locale)EditorGUILayout.ObjectField("Target Locale", targetLocale, typeof(Locale), false);
+
+            float originalLabelWidth = EditorGUIUtility.labelWidth;
+            EditorGUIUtility.labelWidth = 200;
             overwrite = EditorGUILayout.Toggle("Overwrite Existing Translation", overwrite);
+            EditorGUIUtility.labelWidth = originalLabelWidth;
+            
             EditorGUILayout.EndVertical();
 
             EditorGUILayout.Space();
