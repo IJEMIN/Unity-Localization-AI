@@ -24,7 +24,7 @@ You can install this package via Unity Package Manager using the Git URL:
 1. Open the **Package Manager** window.
 2. Click the **+** button and select **Add package from git URL...**.
 3. Enter the following URL:
-   `https://github.com/YourUsername/Unity-Localization-AI.git?path=/com.unity.localization.ai`
+   `https://github.com/IJEMIN/Unity-Localization-AI.git`
 
 ## Setup
 
