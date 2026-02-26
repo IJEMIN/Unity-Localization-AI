@@ -21,6 +21,7 @@ namespace Unity.Localization.AI.Editor
         private bool isTesting = false;
 
         private Vector2 scrollPos;
+        private Vector2 tableScrollPos;
 
         [MenuItem("Window/Asset Management/Localization AI")]
         public static void ShowWindow()
@@ -109,7 +110,8 @@ namespace Unity.Localization.AI.Editor
                 selectedCollections.Clear();
             }
             EditorGUILayout.Space();
-
+            
+            tableScrollPos = EditorGUILayout.BeginScrollView(tableScrollPos, GUILayout.MaxHeight(200));
             foreach (var collection in allCollections)
             {
                 bool isSelected = selectedCollections.Contains(collection);
@@ -121,6 +123,7 @@ namespace Unity.Localization.AI.Editor
                     else selectedCollections.Remove(collection);
                 }
             }
+            EditorGUILayout.EndScrollView();
             EditorGUILayout.EndVertical();
         }
 
