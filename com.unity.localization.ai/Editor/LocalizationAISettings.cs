@@ -24,6 +24,10 @@ namespace Unity.Localization.AI.Editor
                 label = "Localization AI",
                 guiHandler = (searchContext) =>
                 {
+                    // Add standard preferences padding
+                    var style = new GUIStyle { padding = new RectOffset(10, 10, 10, 10) };
+                    EditorGUILayout.BeginVertical(style, GUILayout.ExpandWidth(true));
+                    
                     // API Key
                     var apiKey = PlayerPrefs.GetString(OpenAITranslator.API_KEY_PLAYERPREFS_KEY, "");
                     EditorGUI.BeginChangeCheck();
@@ -68,7 +72,10 @@ namespace Unity.Localization.AI.Editor
                     EditorGUI.BeginChangeCheck();
                     
                     EditorGUILayout.LabelField("System Prompt");
-                    systemPrompt = EditorGUILayout.TextArea(systemPrompt, GUILayout.Height(100));
+                    
+                    // Force word wrap for TextArea to prevent layout expansion with long text
+                    var textAreaStyle = new GUIStyle(EditorStyles.textArea) { wordWrap = true };
+                    systemPrompt = EditorGUILayout.TextArea(systemPrompt, textAreaStyle, GUILayout.Height(100), GUILayout.ExpandWidth(true));
                     
                     if (EditorGUI.EndChangeCheck())
                     {
@@ -84,6 +91,8 @@ namespace Unity.Localization.AI.Editor
 
                     EditorGUILayout.Space();
                     EditorGUILayout.HelpBox("Enter your OpenAI API Key and configure the translation prompt to use the AI-powered localization features.", MessageType.Info);
+
+                    EditorGUILayout.EndVertical();
                 },
                 keywords = new System.Collections.Generic.HashSet<string>(new[] { "Localization", "AI", "OpenAI", "API Key" })
             };
